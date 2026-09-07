@@ -1,32 +1,67 @@
-# React + TypeScript + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+# ⬡ CraftVault
+<img src="./terminal.png" alt="CraftVault preview" width="100%"/>
 
-Currently, two official plugins are available:
+**Explore, analise e organize seus saves de Infinite Craft**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+[![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-## React Compiler
+[Demo](#) · [Reportar Bug](https://github.com/tsuki0-0/craftvault-web/issues) · [Sugerir Feature](https://github.com/tsuki0-0/craftvault-web/issues)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+</div>
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## 📖 Sobre o Projeto
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+**CraftVault** é uma ferramenta web para explorar, analisar e organizar os elementos e combinações que você descobriu jogando **Infinite Craft**. Importe seus saves, navegue pela sua árvore de descobertas, busque elementos específicos e mantenha tudo organizado em um só lugar.
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## ✨ Funcionalidades
+
+- 🗂️ **Visualização de saves** — carregue e explore seus dados salvos do Infinite Craft
+- 🔍 **Busca inteligente** — encontre elementos e combinações rapidamente
+- 🏷️ **Categorização** — organize elementos por categorias e critérios personalizados
+- 📊 **Análise de dados** — estatísticas e insights sobre seu progresso no jogo
+- 💾 **Gerenciamento de dados** — importe, exporte e mantenha seus saves seguros
+
+## 🛠️ Tecnologias
+
+| Camada | Tecnologia |
+|---|---|
+| Framework | React + TypeScript |
+| Build tool | Vite |
+| Linting | Oxlint |
+
+O projeto estará disponível em `Link do vercel`.
+
+## 🗺️ Roadmap
+
+- [ ] Importação automática de saves do Infinite Craft
+- [ ] Exportação de dados em múltiplos formatos
+- [ ] Modo escuro/claro
+- [ ] Compartilhamento de coleções
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma [issue](https://github.com/tsuki0-0/craftvault-web/issues) ou enviar um pull request.
+
+1. Faça um fork do projeto
+2. Crie sua branch (`git checkout -b feature/nova-funcionalidade`)
+3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
+4. Push para a branch (`git push origin feature/nova-funcionalidade`)
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
+---
+
+<div align="center">
+
+Feito com 💙 por [tsuki0-0](https://github.com/tsuki0-0)
+
+</div>
