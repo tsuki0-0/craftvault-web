@@ -40,10 +40,10 @@ O projeto estará disponível em `Link do vercel`.
 
 ## 🗺️ Roadmap
 
-- [ ] Importação automática de saves do Infinite Craft
-- [ ] Exportação de dados em múltiplos formatos
-- [ ] Modo escuro/claro
-- [ ] Compartilhamento de coleções
+- [✓] Você faz a Importação dos seus saves do Infinite Craft
+- [✓] Verificação de quantos Itens Criados no SEU SAVE!
+- [✓] Modo escuro
+- [❌] Compartilhamento de coleções de save
 
 ## 🤝 Contribuindo
 
