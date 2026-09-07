@@ -62,6 +62,6 @@ Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
 
 <div align="center">
 
-Feito com 💙 por [tsuki0-0](https://github.com/tsuki0-0)
+Feito com 💙 por [Tsuki0-0](https://github.com/tsuki0-0) e [Vuthos](https://github.com/Vuthos)
 
 </div>
