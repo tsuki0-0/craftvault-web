@@ -36,7 +36,7 @@
 | Build tool | Vite |
 | Linting | Oxlint |
 
-O projeto estará disponível em `Link do vercel`.
+O projeto estará disponível em [Vercel](https://craftvault-web.vercel.app/).
 
 ## 🗺️ Roadmap
 
