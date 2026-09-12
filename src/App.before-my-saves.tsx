@@ -6,7 +6,6 @@ import { Dashboard } from './components/Dashboard'
 import { ElementDetail } from './components/ElementDetail'
 import { LanguageSwitcher } from './components/LanguageSwitcher'
 import { AuthModal } from './components/AuthModal'
-import { MySaves } from './components/MySaves'
 import { AuthLoading } from './components/AuthLoading'
 import { useI18n } from './i18n/LanguageContext'
 import { useAuth } from './contexts/AuthContext'
@@ -161,26 +160,7 @@ function App() {
               {t('importYourSave')}
               <span>→</span>
             </button>
-            <button
-              className="secondary-button"
-              onClick={() => {
-                if (user) {
-                  document.getElementById('my-saves')?.scrollIntoView({
-                    behavior: 'smooth',
-                  })
-                } else {
-                  setShowAuthModal(true)
-                }
-              }}
-            >
-              {user ? 'Meus Saves' : t('exploreCommunity')}
-            </button>
-
-            {user && (
-              <div id="my-saves">
-                <MySaves />
-              </div>
-            )}
+            <button className="secondary-button">{t('exploreCommunity')}</button>
           </div>
         </section>
 

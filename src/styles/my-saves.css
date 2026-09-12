@@ -1,0 +1,232 @@
+.my-saves {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 48px 0 72px;
+}
+
+.my-saves-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.my-saves-kicker {
+  display: block;
+  margin-bottom: 8px;
+  color: #00e5a0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.my-saves h2 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.my-saves-header p {
+  margin: 8px 0 0;
+  opacity: 0.65;
+}
+
+.my-saves-upload {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid #00e5a0;
+  border-radius: 8px;
+  background: #00e5a0;
+  color: #07110d;
+  cursor: pointer;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: 0.2s ease;
+}
+
+.my-saves-upload:hover {
+  transform: translateY(-1px);
+}
+
+.my-saves-upload.is-uploading {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.my-saves-upload input {
+  display: none;
+}
+
+.my-saves-message {
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.my-saves-message.error {
+  border: 1px solid rgba(255, 80, 80, 0.4);
+  background: rgba(255, 80, 80, 0.08);
+}
+
+.my-saves-message.success {
+  border: 1px solid rgba(0, 229, 160, 0.35);
+  background: rgba(0, 229, 160, 0.08);
+}
+
+.my-saves-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(280px, 1fr)
+  );
+  gap: 18px;
+}
+
+.my-save-card {
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  transition: border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.my-save-card:hover {
+  border-color: rgba(0, 229, 160, 0.3);
+  transform: translateY(-2px);
+}
+
+.my-save-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.my-save-file {
+  padding: 4px 7px;
+  border-radius: 5px;
+  background: rgba(0, 229, 160, 0.1);
+  color: #00e5a0;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.my-save-visibility {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  opacity: 0.65;
+}
+
+.my-save-visibility.public {
+  color: #00e5a0;
+}
+
+.my-save-card h3 {
+  margin: 18px 0 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.my-save-description {
+  min-height: 40px;
+  margin: 0;
+  opacity: 0.6;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.my-save-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.my-save-stats span {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.68rem;
+  opacity: 0.55;
+}
+
+.my-save-stats strong {
+  color: inherit;
+  font-size: 1rem;
+  opacity: 1;
+}
+
+.my-save-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  font-size: 0.72rem;
+  opacity: 0.65;
+}
+
+.my-save-footer button {
+  border: 0;
+  background: transparent;
+  color: #ff6b6b;
+  cursor: pointer;
+  font-size: 0.72rem;
+}
+
+.my-saves-empty,
+.my-saves-loading {
+  padding: 56px 24px;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.my-saves-empty-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 18px;
+  border: 1px solid #00e5a0;
+  border-radius: 10px;
+  color: #00e5a0;
+  font-weight: 900;
+}
+
+.my-saves-empty h3 {
+  margin: 0 0 8px;
+}
+
+.my-saves-empty p {
+  margin: 0;
+  opacity: 0.6;
+}
+
+@media (max-width: 700px) {
+  .my-saves {
+    width: min(100% - 24px, 1200px);
+    padding-top: 32px;
+  }
+
+  .my-saves-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .my-saves-upload {
+    width: 100%;
+  }
+
+  .my-save-stats {
+    gap: 5px;
+  }
+}
