@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { CraftVaultAnalysis } from '../types/save'
 import { Categorizer, type ElementCategory } from '../services/categorizer'
 import { useI18n } from '../i18n/LanguageContext'
@@ -12,8 +13,8 @@ interface CategoriesViewProps {
 export function CategoriesView({ analysis, onElementClick }: CategoriesViewProps) {
   const { language } = useI18n()
   const categorized = Categorizer.categorizeAll(analysis.elements)
+  const [expandedCategory, setExpandedCategory] = useState<ElementCategory | null>(null)
 
-  // Ordenar por quantidade de elementos (maior primeiro)
   const sortedCategories = Array.from(categorized.entries())
     .filter(([_, elements]) => elements.length > 0)
     .sort((a, b) => b[1].length - a[1].length)
@@ -21,7 +22,7 @@ export function CategoriesView({ analysis, onElementClick }: CategoriesViewProps
   return (
     <div className="categories-view">
       <div className="categories-header">
-        <h2>Elementos por Categoria</h2>
+        <h2>Organização</h2>
         <p className="categories-subtitle">
           {analysis.elements.length} elementos classificados
         </p>
@@ -36,7 +37,7 @@ export function CategoriesView({ analysis, onElementClick }: CategoriesViewProps
             </div>
 
             <div className="category-elements">
-              {elements.slice(0, 8).map((el) => (
+              {(expandedCategory === category ? elements : elements.slice(0, 8)).map((el) => (
                 <button
                   key={el.id}
                   className="category-element-button"
@@ -51,9 +52,16 @@ export function CategoriesView({ analysis, onElementClick }: CategoriesViewProps
               ))}
               
               {elements.length > 8 && (
-                <div className="category-more">
-                  +{elements.length - 8} mais
-                </div>
+                <button
+                  className="category-more"
+                  onClick={() => setExpandedCategory(
+                    expandedCategory === category ? null : category
+                  )}
+                >
+                  {expandedCategory === category
+                    ? '▲ Fechar'
+                    : `+${elements.length - 8} mais`}
+                </button>
               )}
             </div>
           </div>
