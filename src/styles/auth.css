@@ -160,3 +160,35 @@
     font-size: 24px;
   }
 }
+
+.auth-success {
+  text-align: center;
+}
+
+.auth-success h3 {
+  color: #66ff66;
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+
+.auth-success p {
+  color: #aaaaaa;
+  margin: 0 0 20px;
+  font-size: 13px;
+}
+
+.auth-success {
+  text-align: center;
+}
+
+.auth-success h3 {
+  color: #66ff66;
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+
+.auth-success p {
+  color: #aaaaaa;
+  margin: 0 0 20px;
+  font-size: 13px;
+}
