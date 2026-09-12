@@ -1,6 +1,6 @@
 .app {
   min-height: 100vh;
-  background: #000000;
+  background: linear-gradient(135deg, #000000 0%, #0a0a1a 50%, #1a0a2e 100%);
   color: #ffffff;
 }
 
@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #1a1a1a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .logo {
@@ -33,7 +33,7 @@
   height: 31px;
   display: grid;
   place-items: center;
-  border: 1px solid #333333;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   font-size: 16px;
   color: #ffffff;
@@ -57,8 +57,8 @@
 
 .header-button {
   padding: 8px 16px;
-  background: transparent;
-  border: 1px solid #333333;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: #ffffff;
   border-radius: 8px;
   font-size: 13px;
@@ -68,8 +68,8 @@
 }
 
 .header-button:hover {
-  background: #0d0d0d;
-  border-color: #555555;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 main {
@@ -85,8 +85,8 @@ main {
 .hero-badge {
   display: inline-block;
   padding: 8px 16px;
-  background: #0d0d0d;
-  border: 1px solid #333333;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   color: #aaaaaa;
   font-size: 12px;
@@ -102,7 +102,7 @@ main {
 }
 
 .hero h1 span {
-  color: #cccccc;
+  color: #bbbbbb;
 }
 
 .hero-description {
@@ -149,7 +149,7 @@ main {
   padding: 12px 24px;
   background: transparent;
   color: #ffffff;
-  border: 1px solid #333333;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   font-weight: 600;
   font-size: 14px;
@@ -158,8 +158,8 @@ main {
 }
 
 .secondary-button:hover {
-  background: #0d0d0d;
-  border-color: #555555;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .stats {
@@ -171,10 +171,11 @@ main {
 
 .stat-card {
   padding: 20px;
-  background: #0d0d0d;
-  border: 1px solid #1a1a1a;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   text-align: center;
+  backdrop-filter: blur(10px);
 }
 
 .stat-card strong {
@@ -228,10 +229,11 @@ main {
   max-width: 500px;
   margin: 0 auto;
   padding: 40px;
-  background: #0d0d0d;
-  border: 1px solid #1a1a1a;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   text-align: center;
+  backdrop-filter: blur(10px);
 }
 
 .upload-icon {
@@ -255,8 +257,8 @@ main {
 .selected-file {
   margin: 20px 0;
   padding: 12px;
-  background: #000000;
-  border: 1px solid #1a1a1a;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   text-align: left;
 }
@@ -314,7 +316,7 @@ main {
 .feature-number {
   font-size: 48px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: rgba(255, 255, 255, 0.1);
   margin-bottom: 16px;
 }
 
@@ -335,7 +337,7 @@ main {
 footer {
   text-align: center;
   padding: 60px 20px;
-  border-top: 1px solid #1a1a1a;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   margin-top: 80px;
 }
 
