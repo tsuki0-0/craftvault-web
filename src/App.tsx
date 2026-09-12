@@ -6,6 +6,8 @@ import { Dashboard } from './components/Dashboard'
 import { ElementDetail } from './components/ElementDetail'
 import { LanguageSwitcher } from './components/LanguageSwitcher'
 import { useI18n } from './i18n/LanguageContext'
+import { useAuth } from './contexts/AuthContext'
+import { AuthPage } from './pages/AuthPage'
 import type { CraftVaultAnalysis } from './types/save'
 
 function App() {
@@ -16,6 +18,26 @@ function App() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const { t } = useI18n()
+  const { user, loading: authLoading, signOut } = useAuth()
+
+  if (authLoading) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, #000000 0%, #0a0a1a 50%, #1a0a2e 100%)',
+        color: '#ffffff'
+      }}>
+        <p>Carregando...</p>
+      </div>
+    )
+  }
+
+  if (!user) {
+    return <AuthPage />
+  }
 
   async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0]
@@ -60,9 +82,15 @@ function App() {
           </nav>
 
           <div className="header-buttons">
+            <span style={{ fontSize: '12px', color: '#aaaaaa' }}>
+              {user.email}
+            </span>
             <LanguageSwitcher />
             <button className="header-button" onClick={() => setAnalysis(null)}>
               {t('newImport')}
+            </button>
+            <button className="header-button" onClick={() => signOut()}>
+              Sair
             </button>
           </div>
         </header>
@@ -103,8 +131,13 @@ function App() {
         </nav>
 
         <div className="header-buttons">
+          <span style={{ fontSize: '12px', color: '#aaaaaa' }}>
+            {user.email}
+          </span>
           <LanguageSwitcher />
-          <button className="header-button">{t('getStarted')}</button>
+          <button className="header-button" onClick={() => signOut()}>
+            Sair
+          </button>
         </div>
       </header>
 
