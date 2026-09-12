@@ -74,7 +74,6 @@ function App() {
             analysis={analysis}
             elementId={selectedElementId}
             onClose={() => setSelectedElementId(null)}
-            onElementClick={setSelectedElementId}
           />
         )}
 

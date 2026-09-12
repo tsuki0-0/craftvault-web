@@ -3,10 +3,10 @@
   align-items: center;
   gap: 6px;
   padding: 8px 12px;
-  background: rgba(141, 147, 255, 0.1);
-  border: 1px solid rgba(141, 147, 255, 0.2);
+  background: #0d0d0d;
+  border: 1px solid #1a1a1a;
   border-radius: 8px;
-  color: #8d93ff;
+  color: #ffffff;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -16,8 +16,8 @@
 }
 
 .language-switcher:hover {
-  background: rgba(141, 147, 255, 0.2);
-  border-color: rgba(141, 147, 255, 0.4);
+  background: #1a1a1a;
+  border-color: #333333;
 }
 
 .language-switcher:active {
