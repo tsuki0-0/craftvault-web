@@ -7,7 +7,6 @@ import { ElementDetail } from './components/ElementDetail'
 import { LanguageSwitcher } from './components/LanguageSwitcher'
 import { useI18n } from './i18n/LanguageContext'
 import { useAuth } from './contexts/AuthContext'
-import { AuthPage } from './pages/AuthPage'
 import type { CraftVaultAnalysis } from './types/save'
 
 function App() {
@@ -33,10 +32,6 @@ function App() {
         <p>Carregando...</p>
       </div>
     )
-  }
-
-  if (!user) {
-    return <AuthPage />
   }
 
   async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -82,16 +77,21 @@ function App() {
           </nav>
 
           <div className="header-buttons">
-            <span style={{ fontSize: '12px', color: '#aaaaaa' }}>
-              {user.email}
-            </span>
+            {user && <span style={{ fontSize: '12px', color: '#aaaaaa' }}>{user.email}</span>}
             <LanguageSwitcher />
             <button className="header-button" onClick={() => setAnalysis(null)}>
               {t('newImport')}
             </button>
-            <button className="header-button" onClick={() => signOut()}>
-              Sair
-            </button>
+            {user && (
+              <button className="header-button" onClick={() => signOut()}>
+                Sair
+              </button>
+            )}
+            {!user && (
+              <button className="header-button" onClick={() => window.location.href = '/auth'}>
+                Login
+              </button>
+            )}
           </div>
         </header>
 
@@ -131,13 +131,19 @@ function App() {
         </nav>
 
         <div className="header-buttons">
-          <span style={{ fontSize: '12px', color: '#aaaaaa' }}>
-            {user.email}
-          </span>
           <LanguageSwitcher />
-          <button className="header-button" onClick={() => signOut()}>
-            Sair
-          </button>
+          {!user ? (
+            <button className="header-button" onClick={() => window.location.href = '/auth'}>
+              Login / Criar Conta
+            </button>
+          ) : (
+            <>
+              <span style={{ fontSize: '12px', color: '#aaaaaa' }}>{user.email}</span>
+              <button className="header-button" onClick={() => signOut()}>
+                Sair
+              </button>
+            </>
+          )}
         </div>
       </header>
 
