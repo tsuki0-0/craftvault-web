@@ -5,6 +5,7 @@ import { SaveNormalizer } from './services/normalizer'
 import { Dashboard } from './components/Dashboard'
 import { ElementDetail } from './components/ElementDetail'
 import { LanguageSwitcher } from './components/LanguageSwitcher'
+import { AuthModal } from './components/AuthModal'
 import { useI18n } from './i18n/LanguageContext'
 import { useAuth } from './contexts/AuthContext'
 import type { CraftVaultAnalysis } from './types/save'
@@ -16,6 +17,7 @@ function App() {
   const [selectedElementId, setSelectedElementId] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  const [showAuthModal, setShowAuthModal] = useState(false)
   const { t } = useI18n()
   const { user, loading: authLoading, signOut } = useAuth()
 
@@ -82,13 +84,12 @@ function App() {
             <button className="header-button" onClick={() => setAnalysis(null)}>
               {t('newImport')}
             </button>
-            {user && (
+            {user ? (
               <button className="header-button" onClick={() => signOut()}>
                 Sair
               </button>
-            )}
-            {!user && (
-              <button className="header-button" onClick={() => window.location.href = '/auth'}>
+            ) : (
+              <button className="header-button" onClick={() => setShowAuthModal(true)}>
                 Login
               </button>
             )}
@@ -112,6 +113,8 @@ function App() {
           </div>
           <p>{t('slogan')}</p>
         </footer>
+
+        <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
       </div>
     )
   }
@@ -132,17 +135,17 @@ function App() {
 
         <div className="header-buttons">
           <LanguageSwitcher />
-          {!user ? (
-            <button className="header-button" onClick={() => window.location.href = '/auth'}>
-              Login / Criar Conta
-            </button>
-          ) : (
+          {user ? (
             <>
               <span style={{ fontSize: '12px', color: '#aaaaaa' }}>{user.email}</span>
               <button className="header-button" onClick={() => signOut()}>
                 Sair
               </button>
             </>
+          ) : (
+            <button className="header-button" onClick={() => setShowAuthModal(true)}>
+              Login / Criar Conta
+            </button>
           )}
         </div>
       </header>
@@ -262,6 +265,8 @@ function App() {
         </div>
         <p>{t('slogan')}</p>
       </footer>
+
+      <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
     </div>
   )
 }
