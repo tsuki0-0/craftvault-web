@@ -6,6 +6,7 @@ import { Dashboard } from './components/Dashboard'
 import { ElementDetail } from './components/ElementDetail'
 import { LanguageSwitcher } from './components/LanguageSwitcher'
 import { AuthModal } from './components/AuthModal'
+import { AuthLoading } from './components/AuthLoading'
 import { useI18n } from './i18n/LanguageContext'
 import { useAuth } from './contexts/AuthContext'
 import type { CraftVaultAnalysis } from './types/save'
@@ -22,18 +23,7 @@ function App() {
   const { user, loading: authLoading, signOut } = useAuth()
 
   if (authLoading) {
-    return (
-      <div style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: 'linear-gradient(135deg, #000000 0%, #0a0a1a 50%, #1a0a2e 100%)',
-        color: '#ffffff'
-      }}>
-        <p>Carregando...</p>
-      </div>
-    )
+    return <AuthLoading />
   }
 
   async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
