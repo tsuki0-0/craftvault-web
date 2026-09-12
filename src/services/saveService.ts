@@ -35,7 +35,7 @@ export async function uploadSaveFile(
     .from('craftvault-saves')
     .upload(filePath, file, {
       upsert: false,
-      contentType: file.type || 'application/octet-stream',
+      contentType: 'application/octet-stream',
     })
 
   if (error) {

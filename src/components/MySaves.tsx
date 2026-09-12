@@ -82,12 +82,28 @@ export function MySaves() {
     } catch (err) {
       console.error(err)
 
-      const message =
-        err instanceof Error
-          ? err.message
-          : 'Não foi possível importar o save.'
+      let message = 'Não foi possível importar o save.'
 
-      setError(message)
+      if (err instanceof Error) {
+        message = err.message
+      } else if (err && typeof err === 'object') {
+        const e = err as {
+          message?: string
+          error_description?: string
+          details?: string
+          hint?: string
+        }
+
+        message =
+          e.message ||
+          e.error_description ||
+          e.details ||
+          e.hint ||
+          message
+      }
+
+      console.error('CRAFTVAULT UPLOAD ERROR:', err)
+      setError(`Erro ao importar: ${message}`)
     } finally {
       setUploading(false)
       event.target.value = ''

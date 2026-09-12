@@ -1,0 +1,100 @@
+.community-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.community-header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.community-header h1 {
+  color: #ffffff;
+  font-size: 36px;
+  margin: 0 0 10px;
+  font-weight: 700;
+}
+
+.community-header p {
+  color: #aaaaaa;
+  font-size: 16px;
+  margin: 0;
+}
+
+.community-loading,
+.community-error,
+.community-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: #aaaaaa;
+  font-size: 16px;
+}
+
+.community-error {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  border-radius: 8px;
+  color: #ff6666;
+}
+
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.community-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.2s ease;
+}
+
+.community-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.community-card h3 {
+  color: #ffffff;
+  font-size: 16px;
+  margin: 0 0 10px;
+  font-weight: 600;
+}
+
+.save-description {
+  color: #aaaaaa;
+  font-size: 13px;
+  margin: 0 0 15px;
+  line-height: 1.5;
+}
+
+.save-stats {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  font-size: 12px;
+  color: #888888;
+}
+
+.download-button {
+  width: 100%;
+  padding: 10px;
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.download-button:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+}
