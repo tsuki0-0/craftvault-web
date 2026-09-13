@@ -6,14 +6,16 @@ import { Dashboard } from './components/Dashboard'
 import { ElementDetail } from './components/ElementDetail'
 import { LanguageSwitcher } from './components/LanguageSwitcher'
 import { AuthModal } from './components/AuthModal'
-import { MySaves } from './components/MySaves'
-import { AuthLoading } from './components/AuthLoading'
+import { CommunityPage } from './pages/CommunityPage'
 import { useI18n } from './i18n/LanguageContext'
 import { useAuth } from './contexts/AuthContext'
 import type { CraftVaultAnalysis } from './types/save'
 
+type PageType = 'home' | 'dashboard' | 'community'
+
 function App() {
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const [currentPage, setCurrentPage] = useState<PageType>('home')
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [analysis, setAnalysis] = useState<CraftVaultAnalysis | null>(null)
   const [selectedElementId, setSelectedElementId] = useState<string | null>(null)
@@ -24,7 +26,18 @@ function App() {
   const { user, loading: authLoading, signOut } = useAuth()
 
   if (authLoading) {
-    return <AuthLoading />
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, #000000 0%, #0a0a1a 50%, #1a0a2e 100%)',
+        color: '#ffffff'
+      }}>
+        <p>Carregando...</p>
+      </div>
+    )
   }
 
   async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -40,6 +53,7 @@ function App() {
       const normalized = SaveNormalizer.normalize(rawSave, `save_${Date.now()}`)
       setAnalysis(normalized)
       setSelectedElementId(null)
+      setCurrentPage('dashboard')
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Unknown error occurred'
       setError(message)
@@ -52,7 +66,8 @@ function App() {
     fileInputRef.current?.click()
   }
 
-  if (analysis) {
+  // Página de Dashboard (com análise carregada)
+  if (analysis && currentPage === 'dashboard') {
     return (
       <div className="app">
         <header className="header">
@@ -62,17 +77,17 @@ function App() {
           </div>
 
           <nav className="nav">
-            <a href="#explore" onClick={() => setAnalysis(null)}>
+            <a href="#" onClick={() => { setCurrentPage('home'); setAnalysis(null) }}>
               {t('home')}
             </a>
-            <a href="#community">{t('community')}</a>
+            <a href="#" onClick={() => setCurrentPage('community')}>{t('community')}</a>
             <a href="#about">{t('about')}</a>
           </nav>
 
           <div className="header-buttons">
             {user && <span style={{ fontSize: '12px', color: '#aaaaaa' }}>{user.email}</span>}
             <LanguageSwitcher />
-            <button className="header-button" onClick={() => setAnalysis(null)}>
+            <button className="header-button" onClick={() => { setCurrentPage('home'); setAnalysis(null) }}>
               {t('newImport')}
             </button>
             {user ? (
@@ -110,6 +125,53 @@ function App() {
     )
   }
 
+  // Página de Comunidade
+  if (currentPage === 'community') {
+    return (
+      <div className="app">
+        <header className="header">
+          <div className="logo">
+            <span className="logo-mark">C</span>
+            <span>CRAFT<span>VAULT</span></span>
+          </div>
+
+          <nav className="nav">
+            <a href="#" onClick={() => setCurrentPage('home')}>{t('home')}</a>
+            <a href="#" onClick={() => setCurrentPage('community')}>{t('community')}</a>
+            <a href="#about">{t('about')}</a>
+          </nav>
+
+          <div className="header-buttons">
+            {user && <span style={{ fontSize: '12px', color: '#aaaaaa' }}>{user.email}</span>}
+            <LanguageSwitcher />
+            {user ? (
+              <button className="header-button" onClick={() => signOut()}>
+                Sair
+              </button>
+            ) : (
+              <button className="header-button" onClick={() => setShowAuthModal(true)}>
+                Login / Criar Conta
+              </button>
+            )}
+          </div>
+        </header>
+
+        <CommunityPage />
+
+        <footer id="about">
+          <div className="logo">
+            <span className="logo-mark">C</span>
+            <span>CRAFT<span>VAULT</span></span>
+          </div>
+          <p>{t('slogan')}</p>
+        </footer>
+
+        <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
+      </div>
+    )
+  }
+
+  // Página Home (padrão)
   return (
     <div className="app">
       <header className="header">
@@ -119,8 +181,8 @@ function App() {
         </div>
 
         <nav className="nav">
-          <a href="#explore">{t('home')}</a>
-          <a href="#community">{t('community')}</a>
+          <a href="#" onClick={() => setCurrentPage('home')}>{t('home')}</a>
+          <a href="#" onClick={() => setCurrentPage('community')}>{t('community')}</a>
           <a href="#about">{t('about')}</a>
         </nav>
 
@@ -161,26 +223,9 @@ function App() {
               {t('importYourSave')}
               <span>→</span>
             </button>
-            <button
-              className="secondary-button"
-              onClick={() => {
-                if (user) {
-                  document.getElementById('my-saves')?.scrollIntoView({
-                    behavior: 'smooth',
-                  })
-                } else {
-                  setShowAuthModal(true)
-                }
-              }}
-            >
-              {user ? 'Meus Saves' : t('exploreCommunity')}
+            <button className="secondary-button" onClick={() => setCurrentPage('community')}>
+              {t('exploreCommunity')}
             </button>
-
-            {user && (
-              <div id="my-saves">
-                <MySaves />
-              </div>
-            )}
           </div>
         </section>
 
