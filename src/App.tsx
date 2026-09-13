@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import './App.css'
 import { SaveParser } from './services/parser'
 import { SaveNormalizer } from './services/normalizer'
@@ -7,6 +7,7 @@ import { ElementDetail } from './components/ElementDetail'
 import { LanguageSwitcher } from './components/LanguageSwitcher'
 import { AuthModal } from './components/AuthModal'
 import { LogoMenu } from './components/LogoMenu'
+import { MobileMenu } from './components/MobileMenu'
 import { CommunityPage } from './pages/CommunityPage'
 import { useI18n } from './i18n/LanguageContext'
 import { useAuth } from './contexts/AuthContext'
@@ -23,8 +24,19 @@ function App() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [showAuthModal, setShowAuthModal] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
   const { t } = useI18n()
   const { user, loading: authLoading, signOut } = useAuth()
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   if (authLoading) {
     return (
@@ -74,31 +86,40 @@ function App() {
     }
   }
 
-  // Página de Dashboard (com análise carregada)
-  if (analysis && currentPage === 'dashboard') {
-    return (
-      <div className="app">
-        <header className="header">
+  const HeaderComponent = () => (
+    <header className="header">
+      {isMobile ? (
+        <>
+          <button 
+            className="header-hamburger"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            ☰
+          </button>
+          <div className="logo-mobile">
+            <span className="logo-mark">C</span>
+          </div>
+          <LanguageSwitcher />
+        </>
+      ) : (
+        <>
           <LogoMenu onNavigate={handleNavigate} currentPage={currentPage} />
-          
           <div className="logo">
             <span>CRAFT<span>VAULT</span></span>
           </div>
-
           <nav className="nav">
-            <a href="#" onClick={() => handleNavigate('home')}>
-              {t('home')}
-            </a>
+            <a href="#" onClick={() => handleNavigate('home')}>{t('home')}</a>
             <a href="#" onClick={() => handleNavigate('community')}>{t('community')}</a>
             <a href="#about">{t('about')}</a>
           </nav>
-
           <div className="header-buttons">
             {user && <span style={{ fontSize: '12px', color: '#aaaaaa' }}>{user.email}</span>}
             <LanguageSwitcher />
-            <button className="header-button" onClick={() => handleNavigate('home')}>
-              {t('newImport')}
-            </button>
+            {analysis ? (
+              <button className="header-button" onClick={() => handleNavigate('home')}>
+                {t('newImport')}
+              </button>
+            ) : null}
             {user ? (
               <button className="header-button" onClick={() => signOut()}>
                 Sair
@@ -109,8 +130,17 @@ function App() {
               </button>
             )}
           </div>
-        </header>
+        </>
+      )}
+    </header>
+  )
 
+  // Página de Dashboard
+  if (analysis && currentPage === 'dashboard') {
+    return (
+      <div className="app">
+        <HeaderComponent />
+        
         <Dashboard analysis={analysis} onElementClick={setSelectedElementId} />
 
         {selectedElementId && (
@@ -129,6 +159,17 @@ function App() {
           <p>{t('slogan')}</p>
         </footer>
 
+        {isMobile && (
+          <MobileMenu
+            isOpen={mobileMenuOpen}
+            onClose={() => setMobileMenuOpen(false)}
+            onNavigate={handleNavigate}
+            user={user}
+            onLogout={() => signOut()}
+            onLogin={() => setShowAuthModal(true)}
+          />
+        )}
+
         <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
       </div>
     )
@@ -138,34 +179,8 @@ function App() {
   if (currentPage === 'community') {
     return (
       <div className="app">
-        <header className="header">
-          <LogoMenu onNavigate={handleNavigate} currentPage={currentPage} />
-          
-          <div className="logo">
-            <span>CRAFT<span>VAULT</span></span>
-          </div>
-
-          <nav className="nav">
-            <a href="#" onClick={() => handleNavigate('home')}>{t('home')}</a>
-            <a href="#" onClick={() => handleNavigate('community')}>{t('community')}</a>
-            <a href="#about">{t('about')}</a>
-          </nav>
-
-          <div className="header-buttons">
-            {user && <span style={{ fontSize: '12px', color: '#aaaaaa' }}>{user.email}</span>}
-            <LanguageSwitcher />
-            {user ? (
-              <button className="header-button" onClick={() => signOut()}>
-                Sair
-              </button>
-            ) : (
-              <button className="header-button" onClick={() => setShowAuthModal(true)}>
-                Login / Criar Conta
-              </button>
-            )}
-          </div>
-        </header>
-
+        <HeaderComponent />
+        
         <CommunityPage />
 
         <footer id="about">
@@ -176,43 +191,26 @@ function App() {
           <p>{t('slogan')}</p>
         </footer>
 
+        {isMobile && (
+          <MobileMenu
+            isOpen={mobileMenuOpen}
+            onClose={() => setMobileMenuOpen(false)}
+            onNavigate={handleNavigate}
+            user={user}
+            onLogout={() => signOut()}
+            onLogin={() => setShowAuthModal(true)}
+          />
+        )}
+
         <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
       </div>
     )
   }
 
-  // Página Home (padrão)
+  // Página Home
   return (
     <div className="app">
-      <header className="header">
-        <LogoMenu onNavigate={handleNavigate} currentPage={currentPage} />
-        
-        <div className="logo">
-          <span>CRAFT<span>VAULT</span></span>
-        </div>
-
-        <nav className="nav">
-          <a href="#" onClick={() => handleNavigate('home')}>{t('home')}</a>
-          <a href="#" onClick={() => handleNavigate('community')}>{t('community')}</a>
-          <a href="#about">{t('about')}</a>
-        </nav>
-
-        <div className="header-buttons">
-          <LanguageSwitcher />
-          {user ? (
-            <>
-              <span style={{ fontSize: '12px', color: '#aaaaaa' }}>{user.email}</span>
-              <button className="header-button" onClick={() => signOut()}>
-                Sair
-              </button>
-            </>
-          ) : (
-            <button className="header-button" onClick={() => setShowAuthModal(true)}>
-              Login / Criar Conta
-            </button>
-          )}
-        </div>
-      </header>
+      <HeaderComponent />
 
       <main>
         <section className="hero">
@@ -331,6 +329,17 @@ function App() {
         </div>
         <p>{t('slogan')}</p>
       </footer>
+
+      {isMobile && (
+        <MobileMenu
+          isOpen={mobileMenuOpen}
+          onClose={() => setMobileMenuOpen(false)}
+          onNavigate={handleNavigate}
+          user={user}
+          onLogout={() => signOut()}
+          onLogin={() => setShowAuthModal(true)}
+        />
+      )}
 
       <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
     </div>
