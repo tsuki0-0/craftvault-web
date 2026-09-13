@@ -6,6 +6,7 @@ import { Dashboard } from './components/Dashboard'
 import { ElementDetail } from './components/ElementDetail'
 import { LanguageSwitcher } from './components/LanguageSwitcher'
 import { AuthModal } from './components/AuthModal'
+import { LogoMenu } from './components/LogoMenu'
 import { CommunityPage } from './pages/CommunityPage'
 import { useI18n } from './i18n/LanguageContext'
 import { useAuth } from './contexts/AuthContext'
@@ -66,28 +67,36 @@ function App() {
     fileInputRef.current?.click()
   }
 
+  function handleNavigate(page: PageType) {
+    setCurrentPage(page)
+    if (page !== 'dashboard') {
+      setAnalysis(null)
+    }
+  }
+
   // Página de Dashboard (com análise carregada)
   if (analysis && currentPage === 'dashboard') {
     return (
       <div className="app">
         <header className="header">
+          <LogoMenu onNavigate={handleNavigate} currentPage={currentPage} />
+          
           <div className="logo">
-            <span className="logo-mark">C</span>
             <span>CRAFT<span>VAULT</span></span>
           </div>
 
           <nav className="nav">
-            <a href="#" onClick={() => { setCurrentPage('home'); setAnalysis(null) }}>
+            <a href="#" onClick={() => handleNavigate('home')}>
               {t('home')}
             </a>
-            <a href="#" onClick={() => setCurrentPage('community')}>{t('community')}</a>
+            <a href="#" onClick={() => handleNavigate('community')}>{t('community')}</a>
             <a href="#about">{t('about')}</a>
           </nav>
 
           <div className="header-buttons">
             {user && <span style={{ fontSize: '12px', color: '#aaaaaa' }}>{user.email}</span>}
             <LanguageSwitcher />
-            <button className="header-button" onClick={() => { setCurrentPage('home'); setAnalysis(null) }}>
+            <button className="header-button" onClick={() => handleNavigate('home')}>
               {t('newImport')}
             </button>
             {user ? (
@@ -130,14 +139,15 @@ function App() {
     return (
       <div className="app">
         <header className="header">
+          <LogoMenu onNavigate={handleNavigate} currentPage={currentPage} />
+          
           <div className="logo">
-            <span className="logo-mark">C</span>
             <span>CRAFT<span>VAULT</span></span>
           </div>
 
           <nav className="nav">
-            <a href="#" onClick={() => setCurrentPage('home')}>{t('home')}</a>
-            <a href="#" onClick={() => setCurrentPage('community')}>{t('community')}</a>
+            <a href="#" onClick={() => handleNavigate('home')}>{t('home')}</a>
+            <a href="#" onClick={() => handleNavigate('community')}>{t('community')}</a>
             <a href="#about">{t('about')}</a>
           </nav>
 
@@ -175,14 +185,15 @@ function App() {
   return (
     <div className="app">
       <header className="header">
+        <LogoMenu onNavigate={handleNavigate} currentPage={currentPage} />
+        
         <div className="logo">
-          <span className="logo-mark">C</span>
           <span>CRAFT<span>VAULT</span></span>
         </div>
 
         <nav className="nav">
-          <a href="#" onClick={() => setCurrentPage('home')}>{t('home')}</a>
-          <a href="#" onClick={() => setCurrentPage('community')}>{t('community')}</a>
+          <a href="#" onClick={() => handleNavigate('home')}>{t('home')}</a>
+          <a href="#" onClick={() => handleNavigate('community')}>{t('community')}</a>
           <a href="#about">{t('about')}</a>
         </nav>
 
@@ -223,7 +234,7 @@ function App() {
               {t('importYourSave')}
               <span>→</span>
             </button>
-            <button className="secondary-button" onClick={() => setCurrentPage('community')}>
+            <button className="secondary-button" onClick={() => handleNavigate('community')}>
               {t('exploreCommunity')}
             </button>
           </div>
