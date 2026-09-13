@@ -10,6 +10,8 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose, onNavigate, user, onLogout, onLogin }: MobileMenuProps) {
+  if (!isOpen) return null
+
   const menuItems = [
     { id: 'home', label: 'Início', icon: '🏠' },
     { id: 'community', label: 'Comunidade', icon: '🌍' },
@@ -18,9 +20,7 @@ export function MobileMenu({ isOpen, onClose, onNavigate, user, onLogout, onLogi
 
   return (
     <>
-      {isOpen && (
-        <div className="mobile-menu-overlay" onClick={onClose} />
-      )}
+      <div className="mobile-menu-overlay" onClick={onClose} />
 
       <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
         <div className="mobile-menu-header">

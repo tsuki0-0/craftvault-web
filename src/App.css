@@ -942,3 +942,87 @@ footer p {
     width: calc(100% - 16px);
   }
 }
+
+@media (max-width: 768px) {
+  .header {
+    height: 56px;
+    padding: 0 12px;
+  }
+
+  .primary-button,
+  .secondary-button {
+    padding: 14px 20px;
+    font-size: 14px;
+  }
+
+  .hero-actions {
+    gap: 12px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 16px 12px;
+  }
+
+  .stat-card strong {
+    font-size: 24px;
+  }
+
+  .stat-card span {
+    font-size: 11px;
+  }
+
+  .import-card {
+    padding: 24px 16px;
+  }
+
+  .features {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    height: 56px;
+    padding: 0 12px;
+  }
+
+  .primary-button,
+  .secondary-button {
+    padding: 14px 20px;
+    font-size: 14px;
+  }
+
+  .hero-actions {
+    gap: 12px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 16px 12px;
+  }
+
+  .stat-card strong {
+    font-size: 24px;
+  }
+
+  .stat-card span {
+    font-size: 11px;
+  }
+
+  .import-card {
+    padding: 24px 16px;
+  }
+
+  .features {
+    gap: 24px;
+  }
+}

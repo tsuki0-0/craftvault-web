@@ -145,3 +145,23 @@
     width: 240px;
   }
 }
+
+.logo-menu-toggle {
+  all: unset;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+  opacity: 0.6;
+}
+
+.logo-menu-toggle:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.05);
+}

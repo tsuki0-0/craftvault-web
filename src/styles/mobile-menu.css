@@ -4,50 +4,47 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
   z-index: 999;
-  animation: fadeIn 0.3s ease;
+  animation: fadeIn 0.2s ease;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .mobile-menu {
   position: fixed;
   top: 0;
-  left: -100%;
-  width: 80%;
-  max-width: 320px;
+  left: 0;
+  width: 75%;
+  max-width: 280px;
   height: 100vh;
   background: linear-gradient(135deg, #000000 0%, #0a0a1a 50%, #1a0a2e 100%);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 1000;
-  transition: left 0.3s ease;
+  transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
+  transform: translateX(-100%);
 }
 
 .mobile-menu.open {
-  left: 0;
+  transform: translateX(0);
 }
 
 .mobile-menu-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
+  padding: 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .mobile-menu-header h2 {
   color: #ffffff;
-  font-size: 16px;
+  font-size: 14px;
   margin: 0;
   font-weight: 700;
   letter-spacing: 1px;
@@ -61,16 +58,21 @@
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 18px;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-menu-close:active {
+  opacity: 0.7;
 }
 
 .mobile-menu-nav {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 16px 8px;
+  gap: 4px;
+  padding: 12px;
 }
 
 .mobile-menu-item {
@@ -78,7 +80,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 16px;
+  padding: 14px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -87,8 +89,8 @@
 }
 
 .mobile-menu-item:active {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .mobile-menu-icon {
@@ -103,7 +105,7 @@
 }
 
 .mobile-menu-footer {
-  padding: 20px;
+  padding: 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -130,6 +132,7 @@
   transition: all 0.2s ease;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-align: center;
 }
 
 .mobile-menu-logout:active,

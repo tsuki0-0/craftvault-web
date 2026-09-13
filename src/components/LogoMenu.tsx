@@ -20,9 +20,18 @@ export function LogoMenu({ onNavigate, currentPage }: LogoMenuProps) {
     <div className="logo-menu-container">
       <button 
         className="logo-menu-button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => onNavigate('home')}
+        title="Ir para início"
       >
         <span className="logo-mark">C</span>
+      </button>
+
+      <button
+        className="logo-menu-toggle"
+        onClick={() => setIsOpen(!isOpen)}
+        title="Menu"
+      >
+        ⋮
       </button>
 
       {isOpen && (

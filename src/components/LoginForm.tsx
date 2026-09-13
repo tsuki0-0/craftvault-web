@@ -22,9 +22,22 @@ export function LoginForm({ onSwitchToSignUp }: LoginFormProps) {
       await signIn(email, password)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erro ao fazer login')
-    } finally {
       setLoading(false)
     }
+  }
+
+  if (loading) {
+    return (
+      <div className="auth-container">
+        <div className="auth-card">
+          <div className="auth-loading">
+            <div className="loading-spinner"></div>
+            <h3>Autenticando...</h3>
+            <p>Por favor, aguarde</p>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -62,8 +75,8 @@ export function LoginForm({ onSwitchToSignUp }: LoginFormProps) {
 
           {error && <div className="auth-error">{error}</div>}
 
-          <button type="submit" disabled={loading} className="auth-button">
-            {loading ? 'Entrando...' : 'Entrar'}
+          <button type="submit" className="auth-button">
+            Entrar
           </button>
         </form>
 
