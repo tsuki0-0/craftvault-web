@@ -110,6 +110,7 @@ function App() {
           <nav className="nav">
             <a href="#" onClick={() => handleNavigate('home')}>{t('home')}</a>
             <a href="#" onClick={() => handleNavigate('community')}>{t('community')}</a>
+            {analysis && <a href="#" onClick={() => handleNavigate('dashboard')}>Meus Crafts</a>}
             <a href="#about">{t('about')}</a>
           </nav>
           <div className="header-buttons">
